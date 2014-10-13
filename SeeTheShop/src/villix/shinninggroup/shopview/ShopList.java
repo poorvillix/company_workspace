@@ -1,11 +1,6 @@
 package villix.shinninggroup.shopview;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import villix.shinninggroup.seetheshop.R;
-import villix.shinninggroup.globaldata.GlobalData;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -16,27 +11,10 @@ import android.widget.SimpleAdapter;
 
 public class ShopList extends ListFragment
 {
-	ArrayList<HashMap<String,Object>> mShopList;
 	public ShopList()
 	{
 	}
-	public ShopList(ArrayList<HashMap<String,Object>> theShopList)
-	{
-		mShopList = theShopList;
-	}
-	
-	public interface ShopListListener
-	{
-		void onChangeMainFragment(GlobalData.NowFragState nowState, int nChoice);
-	}
-	private ShopListListener myListener;
-	
-	@Override
-	public void onAttach(Activity activity) {
-		// TODO Auto-generated method stub
-		super.onAttach(activity);
-		myListener = (ShopListListener)activity;
-	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -44,7 +22,7 @@ public class ShopList extends ListFragment
 		super.onCreate(savedInstanceState);
 		SimpleAdapter adapter = new SimpleAdapter( 
 			this.getActivity(),
-			mShopList,
+			ShopFragChoice.getInstance().getShopList(),
 			R.layout.shop_list_column,
 			//new String [] { "Name", "HeadPic", "Address" },
 			//new int[] { R.id.textName,R.id.picHeadPic R.id.textAddress }
@@ -73,6 +51,6 @@ public class ShopList extends ListFragment
 		//Uri uri=Uri.parse(mShopList.get(position).get("WebAddress").toString());
 		//Intent i=new Intent(Intent.ACTION_VIEW,uri);
 		//startActivity(i);
-		myListener.onChangeMainFragment(GlobalData.NowFragState.enumShopWeb, position);
+		ShopFragChoice.getInstance().onChangeFragment(ShopFragChoice.getInstance().getShopListPosDescChoice(position), position);
 	}
 }

@@ -1,0 +1,77 @@
+package villix.shinninggroup.seetheshop;
+
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.Window;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+
+import villix.shinninggroup.globaldata.GlobalData;
+import villix.shinninggroup.shopview.ShopDesc;
+import villix.shinninggroup.shopview.ShopList;
+import villix.shinninggroup.shopview.ShopList.ShopListListener;
+import villix.shinninggroup.shopview.ShopWeb;
+
+public class MainActivity extends FragmentActivity implements ShopListListener
+{
+	private ArrayList<HashMap<String,Object>> mShopList = new ArrayList<HashMap<String,Object>>();
+
+	static MainActivity MainActivityThis;
+
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_main);
+
+		
+		onChangeMainFragment(GlobalData.NowFragState.enumShopList, 0);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	public void onChangeMainFragment(GlobalData.NowFragState nowState, int nChoice)
+	{
+		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		
+		Fragment nowFrag = null;
+		switch(nowState)
+		{
+		case enumShopList:
+			nowFrag = new ShopList(mShopList);
+			break;
+		case enumShopWeb:
+			nowFrag = new ShopWeb(mShopList.get(nChoice).get("WebOrDescAddress").toString());
+			fragmentTransaction.setCustomAnimations(R.anim.push_left_in,R.anim.push_left_out,R.anim.push_left_in,R.anim.push_left_out);
+			break;
+		case enumShopDescription:
+			nowFrag = new ShopDesc(mShopList.get(nChoice).get("WebOrDescAddress").toString(), nChoice);
+			fragmentTransaction.setCustomAnimations(R.anim.push_left_in,R.anim.push_left_out,R.anim.push_left_in,R.anim.push_left_out);
+			break;
+		default:
+			break;
+		}
+		if(nowFrag == null)
+			return;
+		fragmentTransaction.replace(R.id.mainFrameLayout, nowFrag);
+		// 一開始不要用
+		if(nowState != GlobalData.NowFragState.enumShopList)
+			fragmentTransaction.addToBackStack(null);
+		fragmentTransaction.commit();
+	}
+}

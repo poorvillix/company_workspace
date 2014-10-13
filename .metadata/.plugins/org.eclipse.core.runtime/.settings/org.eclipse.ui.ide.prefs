@@ -1,9 +1,11 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=caf588b6daaba7083737ac083c19e417cbbfa407
+EXIT_PROMPT_ON_CLOSE_LAST_WINDOW=false
+IMPORT_FILES_AND_FOLDERS_RELATIVE=true
+IMPORT_FILES_AND_FOLDERS_TYPE=23,1
 PROBLEMS_FILTERS_MIGRATE=true
 eclipse.preferences.version=1
-<<<<<<< HEAD
 platformState=1412257035898
-=======
-platformState=1412238329502
->>>>>>> caf588b6daaba7083737ac083c19e417cbbfa407
 quickStart=false
 tipsAndTricks=true

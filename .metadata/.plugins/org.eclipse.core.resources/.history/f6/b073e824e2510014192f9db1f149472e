@@ -1,0 +1,16 @@
+package villix.shinninggroup.globaldata;
+
+public class GlobalData
+{
+	public static enum NowFragState
+	{
+		enumShopList,
+		enumShopWeb,
+		enumShopDescription
+		
+		getNowFragStateByString(String szPosName)
+		{
+			
+		}
+	}
+}
