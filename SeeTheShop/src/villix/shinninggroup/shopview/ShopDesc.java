@@ -4,6 +4,7 @@ import villix.shinninggroup.globaldata.GlobalData;
 import villix.shinninggroup.seetheshop.R;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -20,11 +21,11 @@ import android.widget.TextView;
 
 public class ShopDesc extends Fragment
 {
-	GlobalData.NowFragState m_nFragState;
+	GlobalData.NowDescTypeState m_nFragState;
 	int m_nChoice;
 	WebView m_WebView;
 	
-	public ShopDesc(GlobalData.NowFragState nFragState, int nChoice)
+	public ShopDesc(GlobalData.NowDescTypeState nFragState, int nChoice)
 	{
 		m_nFragState = nFragState;
 		m_nChoice = nChoice;
@@ -39,6 +40,7 @@ public class ShopDesc extends Fragment
 		switch(m_nFragState)
 		{
 		case enumShopWeb:
+			// 開啟網頁
 			m_WebView = new WebView(getActivity());
 			m_WebView.setWebViewClient(mWebViewClient);
 			m_WebView.getSettings().setDomStorageEnabled(true);
@@ -51,22 +53,24 @@ public class ShopDesc extends Fragment
 			break;
 		case enumShopDescription:
 			
+			String szBackColor = ShopFragChoice.getInstance().getShopListDescPos(m_nChoice)[0];
+			theLayout.setBackgroundColor(Color.parseColor(szBackColor));
+			
+			// 一張圖片
 			ImageView image01= new ImageView(getActivity());
-			String uri = "@drawable/" + ShopFragChoice.getInstance().getShopListDescPos(m_nChoice)[0];
+			String uri = "@drawable/" + ShopFragChoice.getInstance().getShopListDescPos(m_nChoice)[1];
 			int imageResource = getActivity().getResources().getIdentifier(uri, null, getActivity().getPackageName());
 			image01.setImageResource(imageResource);
 			theLayout.addView(image01);
-			
-			
+			// 一串文字
 			TextView text01 = new TextView(getActivity());
 			text01.setMovementMethod(new ScrollingMovementMethod());
-			String desc = ShopFragChoice.getInstance().getShopListDescPos(m_nChoice)[1];
-
-			//desc = desc.replace("\\n", "\n");
+			String desc = ShopFragChoice.getInstance().getShopListDescPos(m_nChoice)[2];
 			
 			text01.setText(Html.fromHtml(desc));
 			text01.setTextSize(18);
 			theLayout.addView(text01);
+			
 			break;
 		default:
 			break;

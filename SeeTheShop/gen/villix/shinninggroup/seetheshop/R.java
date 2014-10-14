@@ -25,30 +25,28 @@ public final class R {
         public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
-        public static final int descpic00001_1=0x7f020000;
-        public static final int headpic00000=0x7f020001;
-        public static final int headpic00001=0x7f020002;
-        public static final int headpic00002=0x7f020003;
-        public static final int headpic00003=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
+        public static final int cover=0x7f020000;
+        public static final int descpic00001_1=0x7f020001;
+        public static final int headpic00000=0x7f020002;
+        public static final int headpic00001=0x7f020003;
+        public static final int headpic00002=0x7f020004;
+        public static final int headpic00003=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0007;
+        public static final int action_settings=0x7f0a0005;
         public static final int mainFrameLayout=0x7f0a0001;
         public static final int main_activity=0x7f0a0000;
         public static final int picHeadPic=0x7f0a0002;
-        public static final int shopListFrameLayout=0x7f0a0005;
-        public static final int shopWebview=0x7f0a0006;
         public static final int textAddress=0x7f0a0004;
         public static final int textName=0x7f0a0003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int shop_desc=0x7f030001;
-        public static final int shop_list=0x7f030002;
-        public static final int shop_list_column=0x7f030003;
-        public static final int shop_main=0x7f030004;
-        public static final int shop_web=0x7f030005;
+        public static final int shop_cover=0x7f030001;
+        public static final int shop_desc=0x7f030002;
+        public static final int shop_list=0x7f030003;
+        public static final int shop_list_column=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f090000;

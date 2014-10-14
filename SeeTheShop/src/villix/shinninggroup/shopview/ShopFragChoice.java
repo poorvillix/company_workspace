@@ -111,21 +111,36 @@ public class ShopFragChoice {
 		System.out.println(mShopListDesc);
 	}
 	
-	public void onChangeMainFragment()
-	{
-		onChangeFragment(GlobalData.NowFragState.enumShopList,0); 
-	}
-	
-	public void onChangeFragment(GlobalData.NowFragState nowState, int nChoice)
+	public void onChangeMainFragment(GlobalData.NowMainFragState nowState)
 	{
 		FragmentTransaction fragmentTransaction = MainActivity.MainActivityThis.getSupportFragmentManager().beginTransaction();
 		
 		Fragment nowFrag = null;
 		switch(nowState)
 		{
+		case enumShopCover:
+			nowFrag = new ShopCover();
+			break;
 		case enumShopList:
 			nowFrag = new ShopList();
 			break;
+		default:
+			break;
+		}
+		if(nowFrag == null)
+			return;
+		fragmentTransaction.replace(R.id.mainFrameLayout, nowFrag);
+		
+		fragmentTransaction.commit();
+	}
+	
+	public void onChangeFragment(GlobalData.NowDescTypeState nowState, int nChoice)
+	{
+		FragmentTransaction fragmentTransaction = MainActivity.MainActivityThis.getSupportFragmentManager().beginTransaction();
+		
+		Fragment nowFrag = null;
+		switch(nowState)
+		{
 		case enumShopWeb:
 		case enumShopDescription:
 			nowFrag = new ShopDesc(nowState, nChoice);
@@ -137,9 +152,9 @@ public class ShopFragChoice {
 		if(nowFrag == null)
 			return;
 		fragmentTransaction.replace(R.id.mainFrameLayout, nowFrag);
-		// 一開始不要用
-		if(nowState != GlobalData.NowFragState.enumShopList)
-			fragmentTransaction.addToBackStack(null);
+		
+		fragmentTransaction.addToBackStack(null);
+		
 		fragmentTransaction.commit();
 	
 	}
@@ -151,9 +166,9 @@ public class ShopFragChoice {
 	{
 		return mShopList.get(nPos);
 	}
-	public GlobalData.NowFragState getShopListPosDescChoice(int nPos)
+	public GlobalData.NowDescTypeState getShopListPosDescChoice(int nPos)
 	{
-		return GlobalData.NowFragState.getNowFragStateByString((String) mShopList.get(nPos).get("DescChoice"));
+		return GlobalData.NowDescTypeState.getNowFragStateByString((String) mShopList.get(nPos).get("DescChoice"));
 	}
 
 	public String[] getShopListDescPos(int nPos)

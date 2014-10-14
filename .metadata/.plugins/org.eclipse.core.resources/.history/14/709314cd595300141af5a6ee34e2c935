@@ -1,0 +1,141 @@
+package villix.shinninggroup.shopview;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import android.widget.LinearLayout;
+
+import villix.shinninggroup.globaldata.GlobalData;
+import villix.shinninggroup.seetheshop.R;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.MeasureSpec;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
+
+public class ShopCover extends Fragment
+{
+	View m_ShopCoverView = null;
+	Timer m_timer = null;
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState)
+	{
+		// TODO Auto-generated method stub
+		m_ShopCoverView = inflater.inflate(R.layout.shop_cover, container,false);
+
+		m_timer = new Timer();
+		m_timer.schedule(task,3000);
+		System.out.println("123");
+		return m_ShopCoverView;
+	}
+	
+	
+	
+
+
+/*
+ * (non-Javadoc)
+ * @see android.support.v4.app.Fragment#onStart()
+     
+	<ImageView
+	android:id="@+id/imageCover"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:src="@drawable/cover"
+	android:contentDescription="@string/app_name"	 />
+ */
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		ImageView imageCover = new ImageView(getActivity());
+	    DisplayMetrics metrics = new DisplayMetrics();  
+	    getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		
+	    m_ShopCoverView.getHeight();
+	    m_ShopCoverView.getHeight();
+		Bitmap oriBitmap = BitmapFactory.decodeResource(m_ShopCoverView.getResources(), R.drawable.cover);
+		int nOriWidth = oriBitmap.getWidth();
+		int nOriHeight = oriBitmap.getHeight();
+		
+		float scaledWidth = (float)metrics.widthPixels / nOriWidth;
+		float scaledHeight = (float)metrics.heightPixels / nOriHeight;
+		
+		System.out.println("metrics.widthPixels = " + metrics.widthPixels);
+		System.out.println("metrics.heightPixels = " + metrics.heightPixels);
+		System.out.println("nOriWidth = " + nOriWidth);
+		System.out.println("nOriHeight = " + nOriHeight);
+		System.out.println("scaledWidth = " + scaledWidth);
+		System.out.println("scaledHeight = " + scaledHeight);
+		
+		Matrix scaleMatrix = new Matrix();
+		scaleMatrix.postScale(scaledWidth, scaledHeight);
+		Bitmap resizedBitmap = Bitmap.createBitmap(oriBitmap, 0, 0, nOriWidth, nOriHeight, scaleMatrix, true);
+		//Bitmap newBitmap = Bitmap.createScaledBitmap(myBitmap,metrics.widthPixels,metrics.heightPixels,true);
+		imageCover.setImageBitmap(resizedBitmap);
+		
+		//Bitmap aa = convertViewToBitmap(imageCover);
+		//imageCover.setImageBitmap(aa);
+		((LinearLayout)m_ShopCoverView).addView(imageCover);
+		
+	}
+
+	public static Bitmap convertViewToBitmap(View view){
+		view.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+	        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+	        view.buildDrawingCache();
+	        Bitmap bitmap = view.getDrawingCache();
+
+	        return bitmap;
+	}
+	
+	private Handler handler = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			System.out.println("456");
+			ShopFragChoice.getInstance().onChangeMainFragment(GlobalData.NowMainFragState.enumShopList);
+			DestroyTimer();
+		}
+	};
+	
+	private TimerTask task = new TimerTask()
+	{
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			Message message = new Message();
+			handler.sendMessage(message);
+		}
+	};
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		DestroyTimer();
+		super.onDestroy();
+	}
+
+	private void DestroyTimer()
+	{
+		if(m_timer != null)
+		{
+			m_timer.cancel();
+			m_timer = null;
+		}
+	}
+}
