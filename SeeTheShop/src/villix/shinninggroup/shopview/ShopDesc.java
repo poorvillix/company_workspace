@@ -45,8 +45,14 @@ public class ShopDesc extends Fragment
 			m_WebView.setWebViewClient(mWebViewClient);
 			m_WebView.getSettings().setDomStorageEnabled(true);
 			m_WebView.getSettings().setJavaScriptEnabled(true);
-			m_WebView.getSettings().setUserAgentString("Android");
+			// 通知網頁現在是用手機板
+			//m_WebView.getSettings().setUserAgentString("Android");
 			m_WebView.getSettings().setBlockNetworkImage(true);
+			m_WebView.getSettings().setSupportZoom(true);
+			m_WebView.getSettings().setBuiltInZoomControls(true);
+		    m_WebView.getSettings().setUseWideViewPort(true);
+		    // 一開始出現的大小跟webview 相等
+		    //m_WebView.getSettings().setLoadWithOverviewMode(true);
 			m_WebView.setWebChromeClient(new WebChromeClient());
 			m_WebView.loadUrl(ShopFragChoice.getInstance().getShopListDescPos(m_nChoice)[0]);
 			theLayout.addView(m_WebView);
@@ -75,25 +81,7 @@ public class ShopDesc extends Fragment
 		default:
 			break;
 		}
-		//if()
-		/*
-		int nPicID = getResources().getIdentifier(m_szShopDesc, "drawable", "com.example.seetheshop");
-		
-		if(nPicID != 0)
-		{
-			mShopImage = (ImageView)ShopPicView.findViewById(R.id.shopImageView);
-			mShopImage.setImageResource(nPicID);
-			mShopImage.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View v)
-				{
-					// TODO Auto-generated method stub
-					//ShopMain fragMain = ((ShopMain)getActivity().getSupportFragmentManager().findFragmentByTag(GlobalData.NowMainFragState.enumShopList.toString()));
-					//fragMain.onChangeShopListFragment(NowShopListFragState.enumShopWeb, m_nChoice);
-				}
-			});
-		}
-		*/
+
 		return ShopDescView;
 	}
 	WebViewClient mWebViewClient = new WebViewClient()

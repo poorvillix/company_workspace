@@ -23,7 +23,7 @@ public class ShopFragChoice {
 	{
 		enumShopListName,
 		enumShopListHeadPic,
-		enumShopListAddress,
+		enumShopListDesc,
 		enumDescChoice,
 	}
 	private static ArrayList<HashMap<String,Object>> mShopList = new ArrayList<HashMap<String,Object>>();
@@ -79,7 +79,7 @@ public class ShopFragChoice {
 			int imageResource = MainContext.getResources().getIdentifier(uri, null, MainContext.getPackageName());
 			item.put("HeadPic", imageResource );
 			// 地址
-			item.put("Address", shopList.get(nLinePos)[ShopListType.enumShopListAddress.ordinal()] );
+			item.put("Desc", shopList.get(nLinePos)[ShopListType.enumShopListDesc.ordinal()] );
 			// 選擇呈現方式
 			item.put("DescChoice", shopList.get(nLinePos)[ShopListType.enumDescChoice.ordinal()] );
 			// 加入List中
@@ -120,9 +120,11 @@ public class ShopFragChoice {
 		{
 		case enumShopCover:
 			nowFrag = new ShopCover();
+			fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out);
 			break;
 		case enumShopList:
 			nowFrag = new ShopList();
+			fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out);
 			break;
 		default:
 			break;
@@ -144,7 +146,7 @@ public class ShopFragChoice {
 		case enumShopWeb:
 		case enumShopDescription:
 			nowFrag = new ShopDesc(nowState, nChoice);
-			fragmentTransaction.setCustomAnimations(R.anim.push_left_in,R.anim.push_left_out,R.anim.push_left_in,R.anim.push_left_out);
+			fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out);
 			break;
 		default:
 			break;

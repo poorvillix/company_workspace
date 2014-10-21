@@ -26,8 +26,8 @@ public class ShopList extends ListFragment
 			R.layout.shop_list_column,
 			//new String [] { "Name", "HeadPic", "Address" },
 			//new int[] { R.id.textName,R.id.picHeadPic R.id.textAddress }
-			new String [] { "Name", "HeadPic", "Address" },
-			new int[] { R.id.textName,R.id.picHeadPic, R.id.textAddress }
+			new String [] { "Name", "HeadPic", "Desc" },
+			new int[] { R.id.textName,R.id.picHeadPic, R.id.textDescription }
 			);
 
 		setListAdapter(adapter);

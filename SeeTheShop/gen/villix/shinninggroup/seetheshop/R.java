@@ -9,8 +9,10 @@ package villix.shinninggroup.seetheshop;
 
 public final class R {
     public static final class anim {
-        public static final int push_left_in=0x7f040000;
-        public static final int push_left_out=0x7f040001;
+        public static final int fade_in=0x7f040000;
+        public static final int fade_out=0x7f040001;
+        public static final int push_left_in=0x7f040002;
+        public static final int push_left_out=0x7f040003;
     }
     public static final class attr {
     }
@@ -31,15 +33,18 @@ public final class R {
         public static final int headpic00001=0x7f020003;
         public static final int headpic00002=0x7f020004;
         public static final int headpic00003=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
+        public static final int headpic00004=0x7f020006;
+        public static final int headpic00005=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0005;
+        public static final int action_settings=0x7f0a0006;
+        public static final int imageCover=0x7f0a0002;
         public static final int mainFrameLayout=0x7f0a0001;
         public static final int main_activity=0x7f0a0000;
-        public static final int picHeadPic=0x7f0a0002;
-        public static final int textAddress=0x7f0a0004;
-        public static final int textName=0x7f0a0003;
+        public static final int picHeadPic=0x7f0a0003;
+        public static final int textDescription=0x7f0a0005;
+        public static final int textName=0x7f0a0004;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

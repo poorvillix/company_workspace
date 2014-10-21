@@ -4,8 +4,6 @@ import villix.shinninggroup.globaldata.GlobalData;
 import villix.shinninggroup.shopview.ShopFragChoice;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.Window;
-import android.view.WindowManager;
 import android.support.v4.app.FragmentActivity;
 
 public class MainActivity extends FragmentActivity
@@ -17,9 +15,9 @@ public class MainActivity extends FragmentActivity
 	{
 		super.onCreate(savedInstanceState);
 		MainActivityThis = this;
-	    requestWindowFeature(Window.FEATURE_NO_TITLE);   //全螢幕設定
-	    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-	    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+	    //requestWindowFeature(Window.FEATURE_NO_TITLE);   //全螢幕設定
+	    //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+	    //WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
 
 		ShopFragChoice.getInstance().onChangeMainFragment(GlobalData.NowMainFragState.enumShopCover);
