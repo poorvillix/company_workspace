@@ -1,0 +1,100 @@
+package villix.shinninggroup.seetheshop;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import villix.shinninggroup.globaldata.GlobalData;
+import villix.shinninggroup.shopview.ShopFragChoice;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.Menu;
+import android.view.Window;
+import android.view.WindowManager;
+import android.support.v4.app.FragmentActivity;
+
+public class MainActivity extends FragmentActivity
+{
+	public static MainActivity MainActivityThis;
+	
+	Timer m_timer = null;
+	private TimerTask m_task = null;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		MainActivityThis = this;
+	    //requestWindowFeature(Window.FEATURE_NO_TITLE);   //¥þ¿Ã¹õ³]©w
+	    //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+	    //WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setContentView(R.layout.activity_main);
+
+		if(m_timer == null)
+			m_timer = new Timer();
+		if(m_task == null)
+			m_task = new TimerTask()
+			{
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					Message message = new Message();
+					handler.sendMessage(message);
+				}
+			};
+		m_timer.schedule(m_task,3000);
+		System.out.println("123");
+		//ShopFragChoice.getInstance().onChangeMainFragment(GlobalData.NowMainFragState.enumShopCover);
+		//onChangeMainFragment(GlobalData.NowFragState.enumShopList, 0);
+	}
+
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		DestroyTimer();
+		ShopFragChoice.getInstance().onChangeMainFragment(GlobalData.NowMainFragState.enumShopList);
+	}
+	
+	private Handler handler = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			System.out.println("456");
+			ShopFragChoice.getInstance().onChangeMainFragment(GlobalData.NowMainFragState.enumShopList);
+			DestroyTimer();
+		}
+	};
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		DestroyTimer();
+		
+		super.onDestroy();
+	}
+
+	private void DestroyTimer()
+	{
+		if(m_timer != null)
+		{
+			m_timer.cancel();
+			m_timer = null;
+			
+			m_task.cancel();
+			m_task = null;
+		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+
+}
