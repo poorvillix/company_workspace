@@ -1,6 +1,5 @@
 package villix.shinninggroup.shopview;
 
-
 import villix.shinninggroup.seetheshop.R;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -12,6 +11,27 @@ import android.widget.SimpleAdapter;
 
 public class ShopList extends ListFragment
 {
+	public ShopList()
+	{
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		SimpleAdapter adapter = new SimpleAdapter( 
+			this.getActivity(),
+			ShopFragChoice.getInstance().getShopList(),
+			R.layout.shop_list_column,
+			//new String [] { "Name", "HeadPic", "Address" },
+			//new int[] { R.id.textName,R.id.picHeadPic R.id.textAddress }
+			new String [] { "Name", "HeadPic", "Desc" },
+			new int[] { R.id.textName,R.id.picHeadPic, R.id.textDescription }
+			);
+		
+		setListAdapter(adapter);
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
@@ -21,28 +41,16 @@ public class ShopList extends ListFragment
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onActivityCreated(savedInstanceState);
-		
-		SimpleAdapter adapter = new SimpleAdapter( 
-			this.getView().getContext(),
-			ShopFragChoice.getInstance().getShopList(),
-			R.layout.shop_list_column,
-			//new String [] { "Name", "HeadPic", "Address" },
-			//new int[] { R.id.textName,R.id.picHeadPic R.id.textAddress }
-			new String [] { "Name", "HeadPic", "Desc" },
-			new int[] { R.id.textName,R.id.picHeadPic, R.id.textDescription }
-			);
-
-		setListAdapter(adapter);
-	}
-
-	@Override
 	public void onListItemClick(ListView l, View v, int position, long id)
 	{
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
+		//ShopMain fragMain = ((ShopMain)getActivity().getSupportFragmentManager().findFragmentByTag(GlobalData.NowMainFragState.enumShopList.toString()));
+		//fragMain.onChangeShopListFragment(NowShopListFragState.enumShopDescription, position);
+		
+		//Uri uri=Uri.parse(mShopList.get(position).get("WebAddress").toString());
+		//Intent i=new Intent(Intent.ACTION_VIEW,uri);
+		//startActivity(i);
 		ShopFragChoice.getInstance().onChangeFragment(ShopFragChoice.getInstance().getShopListPosDescChoice(position), position);
 	}
 }

@@ -36,4 +36,5 @@
 <fullyQualifiedTypeName name="android.graphics.Matrix"/>
 <fullyQualifiedTypeName name="android.widget.LinearLayout"/>
 <fullyQualifiedTypeName name="android.graphics.drawable.BitmapDrawable"/>
+<fullyQualifiedTypeName name="villix.shinninggroup.seetheshop.R"/>
 </qualifiedTypeNameHistroy>

@@ -1,6 +1,5 @@
 package villix.shinninggroup.shopview;
 
-
 import villix.shinninggroup.seetheshop.R;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -26,7 +25,7 @@ public class ShopList extends ListFragment
 		super.onActivityCreated(savedInstanceState);
 		
 		SimpleAdapter adapter = new SimpleAdapter( 
-			this.getView().getContext(),
+			this,
 			ShopFragChoice.getInstance().getShopList(),
 			R.layout.shop_list_column,
 			//new String [] { "Name", "HeadPic", "Address" },
@@ -43,6 +42,12 @@ public class ShopList extends ListFragment
 	{
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
+		//ShopMain fragMain = ((ShopMain)getActivity().getSupportFragmentManager().findFragmentByTag(GlobalData.NowMainFragState.enumShopList.toString()));
+		//fragMain.onChangeShopListFragment(NowShopListFragState.enumShopDescription, position);
+		
+		//Uri uri=Uri.parse(mShopList.get(position).get("WebAddress").toString());
+		//Intent i=new Intent(Intent.ACTION_VIEW,uri);
+		//startActivity(i);
 		ShopFragChoice.getInstance().onChangeFragment(ShopFragChoice.getInstance().getShopListPosDescChoice(position), position);
 	}
 }
